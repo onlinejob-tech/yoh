@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallet</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Wallet</h1>
+            <nav>
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="referral.html">Referral</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <section id="wallet">
+                <h2>Wallet</h2>
+                <p>Balance: <span id="balance">0</span> KSH</p>
+                <button id="depositButton">Deposit</button>
+                <button id="withdrawButton">Withdraw</button>
+            </section>
+            <section id="depositSection" style="display: none;">
+                <h2>Deposit</h2>
+                <p>Pay to M-Pesa Number: <strong>0739286233</strong></p>
+                <form id="depositForm">
+                    <input type="number" id="depositAmount" placeholder="Amount to Deposit" required>
+                    <input type="text" id="transactionId" placeholder="Transaction ID" required>
+                    <button type="submit">Submit</button>
+                </form>
+            </section>
+            <section id="withdrawSection" style="display: none;">
+                <h2>Withdraw</h2>
+                <form id="withdrawForm">
+                    <input type="text" id="withdrawPhoneNumber" placeholder="Phone Number" required>
+                    <input type="text" id="withdrawName" placeholder="Name" required>
+                    <input type="number" id="withdrawAmount" placeholder="Amount to Withdraw" required>
+                    <button type="submit">Submit</button>
+                </form>
+                <p class="disclaimer">Minimum withdrawal amount is 50 KSH. A 20% tax will be deducted from every withdrawal.</p>
+            </section>
+        </main>
+        <footer>
+            <p>&copy; 2025 My Web App. All rights reserved.</p>
+        </footer>
+    </div>
+    <script>
+        let balance = 5000; // Example balance, replace with actual data
+
+        document.getElementById('balance').textContent = balance;
+
+        document.getElementById('depositButton').addEventListener('click', function() {
+            document.getElementById('depositSection').style.display = 'block';
+            document.getElementById('withdrawSection').style.display = 'none';
+        });
+
+        document.getElementById('withdrawButton').addEventListener('click', function() {
+            document.getElementById('withdrawSection').style.display = 'block';
+            document.getElementById('depositSection').style.display = 'none';
+        });
+
+        document.getElementById('depositForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const amount = parseFloat(document.getElementById('depositAmount').value);
+            const transactionId = document.getElementById('transactionId').value;
+            // Simulate deposit process
+            setTimeout(() => {
+                alert(`Deposit of ${amount} KSH successful with transaction ID ${transactionId}!`);
+                balance += amount;
+                document.getElementById('balance').textContent = balance;
+                document.getElementById('depositSection').style.display = 'none';
+            }, 2000); // Simulate delay for deposit process
+        });
+
+        document.getElementById('withdrawForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const phoneNumber = document.getElementById('withdrawPhoneNumber').value;
+            const name = document.getElementById('withdrawName').value;
+            const amount = parseFloat(document.getElementById('withdrawAmount').value);
+            const tax = amount * 0.2;
+            const netAmount = amount - tax;
+
+            if (amount < 50) {
+                alert('Minimum withdrawal amount is 50 KSH.');
+            } else if (amount > balance) {
+                alert('Insufficient balance!');
+            } else {
+                balance -= amount;
+                document.getElementById('balance').textContent = balance;
+                alert(`Withdrawal of ${amount} KSH successful! 20% tax (${tax} KSH) has been deducted. Net amount received: ${netAmount} KSH.`);
+                document.getElementById('withdrawSection').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

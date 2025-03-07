@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Referral Program</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Referral Program</h1>
+            <nav>
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="wallet.html">Wallet</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <section id="referral">
+                <h2>Referral Program</h2>
+                <p>Your referral link:</p>
+                <div class="referral-link-container">
+                    <span id="referralLink">https://greatinvestment.com/referral?code=12345</span>
+                    <button id="copyReferralLink">Copy</button>
+                </div>
+                <p class="notice">You will get 15% cashback from your referral member deposits.</p>
+                <h3>Your Team</h3>
+                <ul id="teamList">
+                    <!-- Team members will be dynamically added here -->
+                </ul>
+                <h3>Referral Commission History</h3>
+                <ul id="referralHistoryList">
+                    <!-- Referral commission history will be dynamically added here -->
+                </ul>
+            </section>
+        </main>
+        <footer>
+            <p>&copy; 2025 My Web App. All rights reserved.</p>
+        </footer>
+    </div>
+    <script>
+        document.getElementById('copyReferralLink').addEventListener('click', function() {
+            const referralLink = document.getElementById('referralLink').textContent;
+            navigator.clipboard.writeText(referralLink).then(() => {
+                alert('Referral link copied to clipboard!');
+            });
+        });
+
+        // Example data, replace with actual data
+        const userName = 'John Doe';
+        const userCode = '12345';
+        const teamMembers = []; // Example team members
+        const referralHistory = []; // Example referral history
+
+        // Generate referral link
+        const referralLink = `https://greatinvestment.com/referral?code=${userCode}`;
+        document.getElementById('referralLink').textContent = referralLink;
+
+        // Populate team members
+        const teamList = document.getElementById('teamList');
+        if (teamMembers.length === 0) {
+            const li = document.createElement('li');
+            li.textContent = 'No team members yet.';
+            teamList.appendChild(li);
+        } else {
+            teamMembers.forEach(member => {
+                const li = document.createElement('li');
+                li.textContent = `${member.name} - First Deposit: ${member.deposit} KSH`;
+                teamList.appendChild(li);
+            });
+        }
+
+        // Populate referral history
+        const referralHistoryList = document.getElementById('referralHistoryList');
+        if (referralHistory.length === 0) {
+            const li = document.createElement('li');
+            li.textContent = 'No referral commissions yet.';
+            referralHistoryList.appendChild(li);
+        } else {
+            referralHistory.forEach(record => {
+                const li = document.createElement('li');
+                li.textContent = `${record.member} - Commission: ${record.commission} KSH`;
+                referralHistoryList.appendChild(li);
+            });
+        }
+    </script>
+</body>
+</html>

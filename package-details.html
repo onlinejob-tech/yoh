@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Package Details</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Package Details</h1>
+            <nav>
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="wallet.html">Wallet</a></li>
+                    <li><a href="referral.html">Referral</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <section id="packageDetails">
+                <h2>Package: <span id="packageName"></span></h2>
+                <p>Amount: KSH <span id="packageAmount"></span></p>
+                <p>Returns Period: <span id="packagePeriod"></span> days</p>
+                <p>Daily Return: KSH <span id="packageDailyReturn"></span></p>
+                <div class="balance-container">
+                    <p>Current Wallet Balance: <span id="walletBalance">0</span> KSH</p>
+                </div>
+                <button id="topUpButton">Top Up</button>
+                <button id="purchaseButton">Purchase with Balance</button>
+            </section>
+        </main>
+        <footer>
+            <p>&copy; 2025 My Web App. All rights reserved.</p>
+        </footer>
+    </div>
+    <div id="topUpModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Top Up</h2>
+            <p>Pay to M-Pesa Number: <strong>0739286233</strong></p>
+            <form id="topUpForm">
+                <input type="number" id="topUpAmount" placeholder="Amount to Deposit" required>
+                <input type="text" id="transactionId" placeholder="Transaction ID" required>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const packageName = urlParams.get('package');
+        const packageAmount = urlParams.get('amount');
+        const packagePeriod = urlParams.get('period');
+        const packageDailyReturn = urlParams.get('dailyReturn');
+
+        document.getElementById('packageName').textContent = packageName;
+        document.getElementById('packageAmount').textContent = packageAmount;
+        document.getElementById('packagePeriod').textContent = packagePeriod;
+        document.getElementById('packageDailyReturn').textContent = packageDailyReturn;
+
+        // Example data, replace with actual data
+        let walletBalance = 5000;
+        document.getElementById('walletBalance').textContent = walletBalance;
+
+        document.getElementById('topUpButton').addEventListener('click', function() {
+            document.getElementById('topUpModal').style.display = 'block';
+        });
+
+        document.querySelector('.close').addEventListener('click', function() {
+            document.getElementById('topUpModal').style.display = 'none';
+        });
+
+        window.addEventListener('click', function(event) {
+            if (event.target == document.getElementById('topUpModal')) {
+                document.getElementById('topUpModal').style.display = 'none';
+            }
+        });
+
+        document.getElementById('topUpForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const topUpAmount = parseInt(document.getElementById('topUpAmount').value);
+            const transactionId = document.getElementById('transactionId').value;
+
+            if (topUpAmount === parseInt(packageAmount)) {
+                alert(`Top up successful! Package ${packageName} purchased.`);
+                document.getElementById('topUpModal').style.display = 'none';
+                // Update wallet balance
+                walletBalance += topUpAmount;
+                document.getElementById('walletBalance').textContent = walletBalance;
+                window.location.href = `income.html?package=${packageName}&amount=${packageAmount}&dailyReturn=${packageDailyReturn}`;
+            } else {
+                alert('Top up amount does not match the package amount.');
+            }
+        });
+
+        document.getElementById('purchaseButton').addEventListener('click', function() {
+            if (walletBalance >= parseInt(packageAmount)) {
+                alert(`Package ${packageName} purchased using balance.`);
+                // Update wallet balance
+                walletBalance -= parseInt(packageAmount);
+                document.getElementById('walletBalance').textContent = walletBalance;
+                window.location.href = `income.html?package=${packageName}&amount=${packageAmount}&dailyReturn=${packageDailyReturn}`;
+            } else {
+                alert('Insufficient balance to purchase this package.');
+            }
+        });
+    </script>
+</body>
+</html>

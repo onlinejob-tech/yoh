@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GREAT INVESTMENT</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>GREAT INVESTMENT</h1>
+            <nav>
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="wallet.html">Wallet</a></li>
+                    <li><a href="referral.html">Referral</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <section id="home">
+                <h2>Home</h2>
+                <p>Welcome, <span id="userName">User Name</span> (Active)</p>
+                <div class="balance-container">
+                    <p>KSH Wallet Balance: <span id="walletBalance">0</span> KSH</p>
+                    <p>Investment Amount: <span id="investmentAmount">0</span> KSH</p>
+                    <p>Earnings: <span id="earnings">0</span> KSH</p>
+                </div>
+                <section id="investmentPackages">
+                    <h2>Investment Packages</h2>
+                    <div class="package-card" data-package="M 1" data-amount="1200" data-period="50" data-daily-return="300">
+                        <img src="g2.jpeg" alt="M 1 Package" class="package-image">
+                        <div class="package-details">
+                            <h3>M 1</h3>
+                            <p>KSH 1200</p>
+                            <p>RETURNS PERIOD: 50 DAYS</p>
+                            <p>DAILY RETURN: 300 KSH</p>
+                        </div>
+                    </div>
+                    <div class="package-card" data-package="M 2" data-amount="2000" data-period="50" data-daily-return="500">
+                        <img src="g1.jpg" alt="M 2 Package" class="package-image">
+                        <div class="package-details">
+                            <h3>M 2</h3>
+                            <p>KSH 2000</p>
+                            <p>RETURNS PERIOD: 50 DAYS</p>
+                            <p>DAILY RETURN: 500 KSH</p>
+                        </div>
+                    </div>
+                    <div class="package-card" data-package="M3" data-amount="5000" data-period="50" data-daily-return="1500">
+                        <img src="g3.jpeg" alt="M3 Package" class="package-image">
+                        <div class="package-details">
+                            <h3>M3</h3>
+                            <p>KSH 5000</p>
+                            <p>RETURNS PERIOD: 50 DAYS</p>
+                            <p>DAILY RETURN: 1500 KSH</p>
+                        </div>
+                    </div>
+                    <div class="package-card" data-package="M4" data-amount="10000" data-period="50" data-daily-return="3000">
+                        <img src="g4.jpeg" alt="M4 Package" class="package-image">
+                        <div class="package-details">
+                            <h3>M4</h3>
+                            <p>KSH 10000</p>
+                            <p>RETURNS PERIOD: 50 DAYS</p>
+                            <p>DAILY RETURN: 3000 KSH</p>
+                        </div>
+                    </div>
+                    <div class="package-card" data-package="M5" data-amount="15000" data-period="50" data-daily-return="4500">
+                        <img src="g5.jpeg" alt="M5 Package" class="package-image">
+                        <div class="package-details">
+                            <h3>M5</h3>
+                            <p>KSH 15000</p>
+                            <p>RETURNS PERIOD: 50 DAYS</p>
+                            <p>DAILY RETURN: 4500 KSH</p>
+                        </div>
+                    </div>
+                    <div class="package-card" data-package="M6" data-amount="20000" data-period="50" data-daily-return="6500">
+                        <img src="g6.jpeg" alt="M6 Package" class="package-image">
+                        <div class="package-details">
+                            <h3>M6</h3>
+                            <p>KSH 20000</p>
+                            <p>RETURNS PERIOD: 50 DAYS</p>
+                            <p>DAILY RETURN: 6500 KSH</p>
+                        </div>
+                    </div>
+                    <div class="package-card" data-package="M7" data-amount="50000" data-period="50" data-daily-return="15000">
+                        <img src="g7.jpeg" alt="M7 Package" class="package-image">
+                        <div class="package-details">
+                            <h3>M7</h3>
+                            <p>KSH 50000</p>
+                            <p>RETURNS PERIOD: 50 DAYS</p>
+                            <p>DAILY RETURN: 15000 KSH</p>
+                        </div>
+                    </div>
+                    <div class="package-card" data-package="M8" data-amount="80000" data-period="50" data-daily-return="20000">
+                        <img src="g8.jpeg" alt="M8 Package" class="package-image">
+                        <div class="package-details">
+                            <h3>M8</h3>
+                            <p>KSH 80000</p>
+                            <p>RETURNS PERIOD: 50 DAYS</p>
+                            <p>DAILY RETURN: 20000 KSH</p>
+                        </div>
+                    </div>
+                    <div class="package-card" data-package="M9" data-amount="100000" data-period="50" data-daily-return="30000">
+                        <img src="G9.jpeg" alt="M9 Package" class="package-image">
+                        <div class="package-details">
+                            <h3>M9</h3>
+                            <p>KSH 100000</p>
+                            <p>RETURNS PERIOD: 50 DAYS</p>
+                            <p>DAILY RETURN: 30000 KSH</p>
+                        </div>
+                    </div>
+                </section>
+            </section>
+        </main>
+    </div>
+    <script>
+        const packageElements = document.querySelectorAll('.package-card');
+        packageElements.forEach(packageElement => {
+            packageElement.addEventListener('click', function() {
+                const selectedPackage = this.getAttribute('data-package');
+                const selectedAmount = this.getAttribute('data-amount');
+                const selectedPeriod = this.getAttribute('data-period');
+                const selectedDailyReturn = this.getAttribute('data-daily-return');
+                window.location.href = `package-details.html?package=${selectedPackage}&amount=${selectedAmount}&period=${selectedPeriod}&dailyReturn=${selectedDailyReturn}`;
+            });
+        });
+    </script>
+</body>
+</html>
